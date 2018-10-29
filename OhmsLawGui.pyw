@@ -119,15 +119,15 @@ class Ui_MainWindow(object):
         self.menuHelp.setTitle(_translate("MainWindow", "Help"))
         self.actionOpen_Premade_Chart.setText(_translate("MainWindow", "Open Premade Chart"))
         self.actionSave_Current_Work.setText(_translate("MainWindow", "Save Current Work"))
+        self.actionSave_Current_Work.triggered.connect(self.save_click)
         self.actionDelete_Current_Work.setText(_translate("MainWindow", "Delete Current Work"))
+        self.actionDelete_Current_Work.triggered.connect(self.delete_click)
         self.actionClose.setText(_translate("MainWindow", "Close"))
         self.actionClose.triggered.connect(self.closed_clicked)
         self.actionHow_To.setText(_translate("MainWindow", "How To"))
         self.actionAbout.setText(_translate("MainWindow", "About"))
 
     def del_click(self):
-        saves.temp(float(self.v_edit.text()), float(self.a_edit.text()),\
-                   float(self.w_edit.text()), float(self.o_edit.text()))
         self.v_edit.setText("")
         self.a_edit.setText("")
         self.o_edit.setText("")
@@ -140,6 +140,14 @@ class Ui_MainWindow(object):
         self.a_edit.setText(str(a))
         self.o_edit.setText(str(o))
         self.w_edit.setText(str(w))
+        saves.temp(float(self.v_edit.text()), float(self.a_edit.text()),\
+                   float(self.w_edit.text()), float(self.o_edit.text()))
+        
+    def save_click(self):
+        saves.save()
+        
+    def delete_click(self):
+        saves.delete()
 
     def closed_clicked(self):
         MainWindow.close()
