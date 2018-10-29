@@ -19,7 +19,6 @@ def temp(v, a, w, o):
     l_amps.append(a)
     l_watts.append(w)
     l_ohms.append(o)
-    print(l_volts, l_amps, l_watts, l_ohms)
     
 def save():
     df = pd.DataFrame({"Volts":l_volts, "Amps":l_amps, "Watts":l_watts, "Ohms":l_ohms})
