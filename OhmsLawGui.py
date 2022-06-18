@@ -9,6 +9,7 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
+from PyQt5.QtWidgets import QMessageBox
 import scripts
 import saves
 
@@ -136,6 +137,10 @@ class Ui_MainWindow(object):
     def calc_click(self):
         v, a, o, w = scripts.calc_clicked(self.v_edit.text(), self.a_edit.text(),\
                                           self.w_edit.text(), self.o_edit.text())
+
+        if v is None and a is None and o is None and w is None:
+            return
+            
         self.v_edit.setText(str(v))
         self.a_edit.setText(str(a))
         self.o_edit.setText(str(o))
@@ -153,6 +158,13 @@ class Ui_MainWindow(object):
         MainWindow.close()
         app.quit()
         
+    def error_message(self, text):
+        msg = QMessageBox()
+        msg.setIcon(QMessageBox.Critical)
+        msg.setText(text)
+        msg.setWindowTitle("Error")
+        msg.exec_()
+
 if __name__ == "__main__":
     import sys
     app = QtWidgets.QApplication(sys.argv)
