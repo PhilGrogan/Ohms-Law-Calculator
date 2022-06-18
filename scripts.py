@@ -10,14 +10,17 @@ import errors as er
 
 def calc_clicked(volts, amps, watts, ohms):
     count = 0
+    count_error_flag = False
     b_volts, count = is_float(volts, count)
     b_amps, count = is_float(amps, count)
     b_watts, count = is_float(watts, count)
     b_ohms, count = is_float(ohms, count)
     if count == 4:
         er.clear_error()
+        count_error_flag = True
     elif count != 2:
         er.count_error()
+        count_error_flag = True
     else:
         if b_volts == True and b_amps == True:
             watts = calculate.watts1(float(volts), float(amps))
@@ -37,6 +40,8 @@ def calc_clicked(volts, amps, watts, ohms):
         elif b_ohms == True and b_watts == True:
             volts = calculate.volts2(float(ohms), float(watts))
             amps = calculate.amps1(float(volts), float(watts))
+    if count_error_flag == True:
+        return (None, None, None, None)
     return(volts, amps, ohms, watts)
         
         
